@@ -6,13 +6,13 @@
           <p class="control  has-icons-left">
             <input class="input is-primary is-rounded" type="text" name="username" v-model="input.username" placeholder="Username"/>
             <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
+              <icon name="user"></icon>
             </span>
           </p>
           <p class="control  has-icons-left">
             <input class="input is-primary is-rounded" type="password" name="password" v-model="input.password" placeholder="Password" />
             <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
+              <icon name="lock"></icon>
             </span>
           </p>
           <input class="input is-primary is-rounded has-background-primary has-text-white" type="submit" v-on:click="login" value="Login" />
@@ -22,12 +22,14 @@
 </template>
 
 <script>
+    import Icon from 'vue-awesome/components/Icon.vue'
     import EventBus from '../util/EventBus'
     var $ = require('jquery')
     var tokenPath = 'http://52.14.168.26:8081/api/security/login'
     var apiCall = require("../util/APIcall.js")
     export default {
         name: 'Login',
+        components: Icon,
         data() {
             return {
                 input: {

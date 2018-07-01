@@ -3,6 +3,7 @@
     <app-header></app-header>
     <section class="main-section section">
       <div class="container content">
+        <city></city>
         <login></login>
       </div>
     </section>
@@ -15,13 +16,15 @@
   import AppFooter from './AppFooter.vue'
   import Category from './Category.vue'
   import Login from './Login.vue'
+  import City from './City.vue'
 
   export default {
     components: {
       'app-header': AppHeader,
       'app-footer': AppFooter,
       'category': Category,
-      'login': Login
+      'login': Login,
+      'city': City
     },
     created: function(){
       EventBus.$on('TOKEN_AVAILABLE', function (token){
