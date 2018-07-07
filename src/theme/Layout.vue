@@ -5,6 +5,7 @@
       <div class="container content">
         <city></city>
         <login></login>
+        <ajaxSuccess></ajaxSuccess>
       </div>
     </section>
     <app-footer></app-footer>
@@ -17,6 +18,8 @@
   import Category from './Category.vue'
   import Login from './Login.vue'
   import City from './City.vue'
+  import AjaxSucess from './SuccessfulAjaxMessage.vue'
+
 
   export default {
     components: {
@@ -24,7 +27,8 @@
       'app-footer': AppFooter,
       'category': Category,
       'login': Login,
-      'city': City
+      'city': City,
+      'ajaxSuccess': AjaxSucess
     },
     created: function(){
       EventBus.$on('TOKEN_AVAILABLE', function (token){

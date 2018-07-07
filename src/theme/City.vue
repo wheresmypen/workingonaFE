@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="control has-icons-left">
+    <div class="dynamic-row control has-icons-left">
       <input class="input" type="text" name="city" placeholder="City" @blur="checkCityName"/>
       <span class="icon is-small is-left">
         <icon name="home"></icon>
@@ -8,14 +8,17 @@
     </div>
     <div class="columns">
       <div class="column">
-        <h2> City Urls</h2>
+        <h2>Permits</h2>
         <div v-for="cityUrl in cityUrls">
           <div class="dynamic-row" v-model="cityUrl.value">
             <div class="field has-addons">
-              <div class="control full-width has-icons-left">
-                <input class="input" type="text" name="city" placeholder="Permits Url"/>
+              <div class="control full-width has-icons-left has-icons-right">
+                <input class="input" type="text" name="city" placeholder="Url" @blur="checkUrl"/>
                 <span class="icon is-small is-left">
                   <icon name="link"></icon>
+                </span>
+                <span class="icon is-small is-right">
+                  <icon name="check"></icon>
                 </span>
               </div>
               <div class="control">
@@ -28,12 +31,12 @@
         </div>
       </div>
       <div class="column">
-        <h2> GeoJson Urls</h2>
+        <h2>GeoJson</h2>
         <div v-for="geoUrl in geoJsonUrls">
           <div class="dynamic-row" v-model="geoUrl.value">
             <div class="field has-addons">
               <div class="control full-width has-icons-left">
-                <input class="input" type="text" name="city" placeholder="Permits Url"/>
+                <input class="input" type="text" name="city" placeholder="Url"/>
                 <span class="icon is-small is-left">
                   <icon name="link"></icon>
                 </span>
@@ -55,9 +58,10 @@
   import EventBus from '../util/EventBus'
   var apiCall = require("../util/APIcall.js")
   var $ = require('jquery')
-  var addCityPath = 'http://52.14.168.26:8081/api/admin/city/add'
+  var addCityPath = 'http://localhost:8081/api/admin/city/add'
   var geoJsonUrls = [""]
   var cityUrls = [""]
+  var currentUrl
   var urlValidator = document.createElement('a')
   var token
 
@@ -67,12 +71,22 @@
         geoJsonUrls,
         cityUrls,
         hasCityName : false,
-        hasCityUrls : false
+        hasCityUrls : false,
+        blocked: false
       }
     },
     methods: {
       checkCityName : function checkCityName(event){
         this.hasCityName  = $(event.target).val() !== ''
+      },
+      checkUrl : function checkUrl(event){
+        urlValidator.href = $(event.target).closest('.field').find('input').val()
+        currentUrl = null
+        if (urlValidator.host && urlValidator.host != window.location.host){
+          var icon = $(event.target).closest('.control').find('.is-right')[0]
+          $(icon).addClass('has-text-success')
+          currentUrl = urlValidator.href
+        }
       },
       addGeoRow :   function addGeoRow(event){
         urlValidator.href = $(event.target).closest('.field').find('input').val()
@@ -94,7 +108,7 @@
         }
       },
       addCity: function addCity(event){
-        if (this.hasCityName && this.hasCityUrls){
+        if (this.hasCityName && (this.hasCityUrls || currentUrl !== null)){
           var city = $(event.target).closest('.content').find('input').val()
           var curls = this.cityUrls
           var gurls = this.geoJsonUrls
@@ -104,12 +118,17 @@
           var request = new Object()
           request.area = city
           request.permits = curls
+          if (request.permits.length === 0){
+            request.permits.push(currentUrl)
+          }
           request.geo = gurls
           apiCall.APIpost(addCityPath, token, request).done(function(response){
             $(event.target).closest('.content').find('.input').each(function(){
               $(this).val('')
+              EventBus.$emit('AJAX_SUCCESS', 'Add City', JSON.parse(response).message)
             })
           })
+          $('.control > .is-right').removeClass('has-text-success')
           this.cityUrls = [""]
           this.geoJsonUrls = [""]
           this.hasCityName = false
