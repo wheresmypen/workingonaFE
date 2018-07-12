@@ -2,41 +2,34 @@
   <div>
     <app-header></app-header>
     <section class="main-section section">
-      <div class="container content">
-        <city></city>
-        <login></login>
-        <ajaxSuccess></ajaxSuccess>
+      <div class="container loginForm">
+        <category></category>
+        <logging></logging>
       </div>
     </section>
     <app-footer></app-footer>
   </div>
 </template>
 <script>
-  import EventBus from '../util/EventBus'
+  import App from './App.vue'
   import AppHeader from './AppHeader.vue'
   import AppFooter from './AppFooter.vue'
   import Category from './Category.vue'
-  import Login from './Login.vue'
-  import City from './City.vue'
-  import AjaxSucess from './SuccessfulAjaxMessage.vue'
-
-
+  import Logging from './Logging.vue'
+  import Router from '../Router.js'
   export default {
+    data() {
+      return {
+        authenticated: false,
+      }
+    },
     components: {
+      'router': Router,
+      'app': App,
       'app-header': AppHeader,
       'app-footer': AppFooter,
       'category': Category,
-      'login': Login,
-      'city': City,
-      'ajaxSuccess': AjaxSucess
-    },
-    created: function(){
-      EventBus.$on('TOKEN_AVAILABLE', function (token){
-        console.log(token)
-      })
-    },
-    mounted: function(){
-      EventBus.$emit('TOKEN_NEEDED')
+      'logging': Logging
     }
   }
 </script>
