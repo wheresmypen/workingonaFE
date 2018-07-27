@@ -3,15 +3,21 @@
         <h1>Login</h1>
         <input type="text" name="username" v-model="input.username" placeholder="Username" />
         <input type="password" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click='login();'>Longing</button>
-        <button type="button" v-if="(postage2.length > 0)" v-on:click='garbage();'>Show first ten records</button>
+        <button type="button" v-on:click='login();'>Log-in</button>
+        <form @submit.prevent="calcul(form.xlength)" class= "form" type="button" v-if="(posts.length > 0)" v-on:change="dump();">
+          <div class="field">
+            <div class="control">
+              <input v-model="form.xlength" class="input" type="text" placeholder="permit requests">
+              <!-- <div>{{ form.xlength }}</div> -->
+            </div>
+          </div>
+        </form>
     </div>
 </template>
 
 <script>
     class dataField {
       constructor() {
-        this.name = "home";
         this.data = new Array();
       }
     }
@@ -19,126 +25,67 @@
     window.temp1 = new dataField()
     var tokenPath = 'http://52.14.168.26:8081/api/security/login'
     var dataAPI = 'http://52.14.168.26:8081/api/client/city?area=boulder&report=master'
-    var app = require("./App.vue")
     var apiCall = require("../util/APIcall.js")
     var dataRequest = require("../util/DataRequest.js")
-
-    var dataAPIStream = new Object({
-      "newCase": "",
-      "reportable": undefined,
-      "number": "",
-      "address": "",
-      "assesorId": "",
-      "status": "",
-      "category": "",
-      "usesAndscopes": [],
-      "permitTypes": [],
-      "totalValue": 0,
-      "subPermitValue": 0,
-      "applied": "",
-      "approved": "",
-      "issued": "",
-      "newUnits": 0,
-      "reUnits": 0,
-      "affordableUnits": 0,
-      "newSquareFeet": 0,
-      "reSquareFeet": 0,
-      "description": "",
-      "primaryFirst": "",
-      "primaryLast": "",
-      "primaryCompany": "",
-      "contractorFirst": "",
-      "contractorLast": "",
-      "contractorCompany": "",
-      "owner1First": "",
-      "owner1Last": "",
-      "owner1Company": "",
-      "owner2First": "",
-      "owner2Last": "",
-      "owner2Company": ""
-    })
 
     export default {
         name: 'Logins',
         data() {
             return {
-                temp1: true,
-                window: window,
-                selectedDOM: app.default.data(),
-                input: {
-                    username: "",
-                    password: ""
-                },
-                postage2: []
+              data: {},
+              form : {
+                xlength : '',
+                number : ''
+              },
+              window: window,
+              input: {
+                  username: "",
+                  password: ""
+              },
+              posts: []
             }
         },
-        //  mounted() {app.default.data().defaultGrab()},
         methods: {
-            garbage(postage) {
+            calcul(valuess) {
+                this.$set(this.$parent.$parent.$data, "xlength", valuess)
+                console.log(this)
+                console.log(valuess)
+                return valuess
+            },
+            dump(postage) {
                 this.postage2 = new Array
-                // app.default.data().defaultGrab()
-                // this is the VUE dynamic document
-                // console.log(document.children["0"].children[1].children["0"].children[1].children["0"].children["0"].__vue__.schloope)
-                // this is just a demo of two values being traded behind the scenes
+                // this is the VUE dynamic document - console.log(document.children["0"].children[1].children["0"].children[1].children["0"].children["0"].__vue__.posts)
                 // concatenates a couple of hard coded arrays to put together some DOM content in VUE
                 var selection = window.temp1.data[0]
-                // console.log(typeof selection)
-                var slipper = selection.slice(0,9)
-                // console.log(slipper.length)
-                slipper.forEach(function(element){this.$parent.$children[1].schloope.push(element)},this)
-                debugger
+                var slipper = selection.slice(0, this.form.xlength)
+                slipper.forEach(function(element){this.$parent.$children[1].posts.push(element)},this)
+                this.$set(this.$parent.$data, "authenticated", slipper)
                 },
             login(data, response) {
-                //  var postage = new Array
+                debugger
                 var elem = event.currentTarget.parentElement
                 var thingy = this
-                app.default.methods.setAuthenticated("user")
-                console.log(app.default.data().defaultGrab)
                 this.$set(this.$parent.$data, "authenticated", "user")
-                this.$set(this.$parent.$data)
                 this.$data.postage = elem.__vue__.postage
-                // console.log(window.document.body.children[0].children[1].firstChild.children[1].__vue__.postage)
-                console.log(elem.__vue__.postage)
-                console.log(window.document.body.children[0].children[1].firstChild.children[1].__vue__.postage)
-                console.log(this.$parent.$parent)//body/div/section/div)
-                console.log(window.temp1)
-
                 if(this.input.username != "" && this.input.password != "") {
-
-                  if(this.input.username == "admin" && this.input.password == "password"){
+                  if(this.input.username == "admin" && this.input.password == "p") {
                       var token = apiCall.APItoken(tokenPath, 'user', 'clave', 'client')
                       token.done(
                         function(response){
-                            console.log(app.default.methods.setAuthenticated("admin"))
-                            // console.log(postage)
-                            // postage.push({"number":"999"})
-                            // postage2.push({"number":"9999"})
-                            debugger
-                            console.log(response)
-                            var schloope = new dataField
-                            debugger
+                            var posts = new dataField
                             dataRequest.APIget(dataAPI, response, '').then( value => {
-                                  debugger
                                   console.log(value); // Success!
-                                  console.log(schloope)
-                                  debugger
-                                  schloope.data.push(value)
-                                  console.log(schloope)
-                                  debugger
-                                  window.temp1 = schloope
+                                  posts.data.push(value)
+                                  window.temp1 = posts
                               }, reason => {
-                              debugger
                               console.log(reason); // Error!
                             } );
                           })
-                          this.postage2 = ["a", "b", "c"]
-                          debugger
                         }
-                  if(this.input.username == "nraboy" && this.input.password == "p") {
+                  if(this.input.username == "nraboy" && this.input.password == "password"){
                     token = dataRequest.APItoken(tokenPath, 'user', 'clave', 'client')
-                    debugger
+                    this.posts = ["a", "b", "c"]
                     token.done(function(response){
-                      console.log(response)
                       dataRequest.APIget(dataAPI, response, '').then( value => {
                         console.log(value); // Success!
                       }, reason => {
@@ -146,13 +93,11 @@
                       } );
                     }
                   )}
+                }
 
                   else {
                   console.log("A username and password must be present");
                   }
-                  console.log(dataAPIStream)
-                  debugger
-              }
             }
 
         }
