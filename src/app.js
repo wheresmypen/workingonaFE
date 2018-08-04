@@ -17,6 +17,11 @@ Vue.component('icon', Icon)
 export const serverBus = new Vue()
 
 const app = new Vue({
+  beforeCreate: function () {
+    console.log(this.$app)
+  },
+  // ...AppLayout
   render: h => h(AppLayout)
 })
+
 export { app }

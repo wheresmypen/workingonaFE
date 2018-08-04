@@ -18446,8 +18446,13 @@ const serverBus = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]()
 
 
 const app = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
+  beforeCreate: function () {
+    console.log(this.$app)
+  },
+  // ...AppLayout
   render: h => h(__WEBPACK_IMPORTED_MODULE_1__theme_Layout_vue__["a" /* default */])
 })
+
 
 
 
@@ -20451,6 +20456,7 @@ var getLogsPath = 'http://localhost:8081/api/admin/city/logs'
     var that = this
     __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('ADMIN_TOKEN_AVAILABLE', (token)=>{
       that.token = token
+      //CALL getPermits here;
     })
     __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('SHOW_PERMITS', ()=>{
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('TOKEN_NEEDED')
@@ -20461,7 +20467,7 @@ var getLogsPath = 'http://localhost:8081/api/admin/city/logs'
     })
   },
   methods: {
-    getLogs: function () {
+    getPermits: function () {
       var that = this;
       apiCall.APIget(getLogsPath, that.token).done(function(response){
 
