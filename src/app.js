@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import AppLayout from './theme/Layout.vue'
-import City from './theme/City.vue'
-import AjaxSucess from './theme/SuccessfulAjaxMessage.vue'
-
 import Icon from 'vue-awesome/components/Icon.vue'
 import 'vue-awesome/icons/user'
 import 'vue-awesome/icons/lock'
@@ -10,12 +7,12 @@ import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/home'
 import 'vue-awesome/icons/link'
 import 'vue-awesome/icons/check'
-import BlockUI from 'vue-blockui'
+import 'vue-awesome/icons/building'
+import 'vue-awesome/icons/wrench'
+import 'vue-awesome/icons/map'
+import 'vue-awesome/icons/book'
 
-Vue.use(BlockUI)
 Vue.component('icon', Icon)
-Vue.component('city', City)
-Vue.component('ajaxSuccess', AjaxSucess)
 
 export const serverBus = new Vue()
 

@@ -1,7 +1,6 @@
 <BlockUI :message="msg" :url="url"></BlockUI>
 
 export default {
-  name: 'app',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',

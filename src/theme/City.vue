@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div v-if="visible === true" class="content">
     <div class="dynamic-row control has-icons-left">
       <input class="input" type="text" name="city" placeholder="City" @blur="checkCityName"/>
       <span class="icon is-small is-left">
@@ -63,7 +63,6 @@
   var cityUrls = [""]
   var currentUrl
   var urlValidator = document.createElement('a')
-  var token
 
   export default {
     data: function(){
@@ -72,7 +71,8 @@
         cityUrls,
         hasCityName : false,
         hasCityUrls : false,
-        blocked: false
+        visible: false,
+        token: null
       }
     },
     methods: {
@@ -122,7 +122,7 @@
             request.permits.push(currentUrl)
           }
           request.geo = gurls
-          apiCall.APIpost(addCityPath, token, request).done(function(response){
+          apiCall.APIpost(addCityPath, this.token, request).done(function(response){
             $(event.target).closest('.content').find('.input').each(function(){
               $(this).val('')
               EventBus.$emit('AJAX_SUCCESS', 'Add City', JSON.parse(response).message)
@@ -137,14 +137,17 @@
       }
     },
     created: function(){
-      EventBus.$on('TOKEN_AVAILABLE', function (resp){
-        token = resp.responseText
+      var that = this
+      EventBus.$on('ADMIN_TOKEN_AVAILABLE', (token)=>{
+        that.token = token
       })
-    },
-    mounted: function(){
-      if (token === null){
-        EventBus.$emit('TOKEN_NEEDED')
-      }
+      EventBus.$on('SHOW_CITY_TAB', ()=>{
+        that.visible = true;
+      })
+      EventBus.$on('HIDE_CITY_TAB', ()=>{
+        that.visible = false;
+      })
+
     }
   }
 </script>

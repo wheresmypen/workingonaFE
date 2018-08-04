@@ -1,42 +1,34 @@
 <template>
-  <div>
-    <app-header></app-header>
-    <section class="main-section section">
-      <div class="container content">
-        <city></city>
-        <login></login>
-        <ajaxSuccess></ajaxSuccess>
+  <section class="main-section">
+    <div class="columns">
+      <div class="column is-one-fifth" name="ad-left">
+        here
       </div>
-    </section>
-    <app-footer></app-footer>
-  </div>
+      <div class="column is-three-fifths" name="main">
+        <app-menu></app-menu>
+        <admin></admin>
+        <login></login>
+        <permits></permits>
+      </div>
+      <div class="column is-one-fifth" name="ad-right">
+        there
+      </div>
+    </div>
+  </section>
 </template>
 <script>
   import EventBus from '../util/EventBus'
-  import AppHeader from './AppHeader.vue'
-  import AppFooter from './AppFooter.vue'
-  import Category from './Category.vue'
+  import AppMenu from './AppMenu.vue'
+  import Admin from './Admin.vue'
   import Login from './Login.vue'
-  import City from './City.vue'
-  import AjaxSucess from './SuccessfulAjaxMessage.vue'
-
+  import Permits from './Permits.vue'
 
   export default {
     components: {
-      'app-header': AppHeader,
-      'app-footer': AppFooter,
-      'category': Category,
+      'app-menu': AppMenu,
+      'admin': Admin,
       'login': Login,
-      'city': City,
-      'ajaxSuccess': AjaxSucess
-    },
-    created: function(){
-      EventBus.$on('TOKEN_AVAILABLE', function (token){
-        console.log(token)
-      })
-    },
-    mounted: function(){
-      EventBus.$emit('TOKEN_NEEDED')
+      'permits': Permits
     }
   }
 </script>
