@@ -28,7 +28,6 @@
         EventBus.$emit('ADMIN_SHOW')
       },
       showPermits: function showPermits(){
-        debugger
         EventBus.$emit('SHOW_PERMITS')
       }
     }

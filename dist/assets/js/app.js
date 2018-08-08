@@ -18929,7 +18929,6 @@ if (false) {(function () {
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('ADMIN_SHOW')
     },
     showPermits: function showPermits(){
-      debugger
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('SHOW_PERMITS')
     }
   }
@@ -19872,7 +19871,7 @@ exports.push([module.i, "\n.modal-content > input[data-v-63d7a1d0] {\n  margin-b
 
 
 var $ = __webpack_require__(5)
-var tokenPath = 'http://52.14.168.26:8081/api/security/login'
+var tokenPath = 'http://localhost:8081/api/security/login'
 var apiCall = __webpack_require__(6)
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: 'Login',
@@ -19883,7 +19882,8 @@ var apiCall = __webpack_require__(6)
                 username: "",
                 password: ""
             },
-            visible: false
+            visible: false,
+            isUser: false
         }
     },
     created: function(){
@@ -19891,14 +19891,25 @@ var apiCall = __webpack_require__(6)
       __WEBPACK_IMPORTED_MODULE_1__util_EventBus__["a" /* default */].$on('TOKEN_NEEDED', () =>{
         that.visible = true
       })
+      __WEBPACK_IMPORTED_MODULE_1__util_EventBus__["a" /* default */].$on('USER_TOKEN_NEEDED', () =>{
+        that.visible = true
+        that.isUser = true;
+      })
+
     },
     methods: {
       login: function login() {
         if(this.input.username != "" && this.input.password != "") {
             var that = this
-            var tokenPromise = apiCall.APItoken(tokenPath, 'admin', 'password', 'ADMIN')
+            var tokenPromise = apiCall.APItoken(tokenPath, that.input.username, that.input.password, that.isUser ? 'ClIENT' : 'ADMIN')
             tokenPromise.done( function (data, status, response) {
-              __WEBPACK_IMPORTED_MODULE_1__util_EventBus__["a" /* default */].$emit('TOKEN_AVAILABLE', response)
+              console.log("login: " + response)
+              if (that.isUser){
+                __WEBPACK_IMPORTED_MODULE_1__util_EventBus__["a" /* default */].$emit('USER_TOKEN_AVAILABLE', response.responseText)
+              }
+              else{
+                __WEBPACK_IMPORTED_MODULE_1__util_EventBus__["a" /* default */].$emit('TOKEN_AVAILABLE', response)
+              }
               that.visible = false
             }).fail(function (request, status, error) {
               //TODO HANDLE THE CRASH MORE THOROUGHLY
@@ -20438,41 +20449,45 @@ exports.push([module.i, "\n#logs ul {\n  -webkit-flex-direction: column;\n  flex
 //
 //
 //
+//
 
 
 var apiCall = __webpack_require__(6)
 var $ = __webpack_require__(5)
-var getLogsPath = 'http://localhost:8081/api/admin/city/logs'
+var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=master&pageSize='
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function(){
     return{
       logs: [],
+      pageSize: 10,
+      page:  0,
       visible: false,
       token: null
     }
   },
   created: function() {
     var that = this
-    __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('ADMIN_TOKEN_AVAILABLE', (token)=>{
+    __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('USER_TOKEN_AVAILABLE', (token)=>{
       that.token = token
-      //CALL getPermits here;
+      that.getPermits()
     })
     __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('SHOW_PERMITS', ()=>{
-      __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('TOKEN_NEEDED')
+      __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('USER_TOKEN_NEEDED')
       that.visible = true
     })
     __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('HIDE_PERMITS', ()=>{
-      that.visible = false;
+      that.visible = false
     })
   },
   methods: {
     getPermits: function () {
-      var that = this;
-      apiCall.APIget(getLogsPath, that.token).done(function(response){
-
-        that.logs = response;
-        that.visible = true;
+      var that = this
+      debugger
+      apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
+        debugger
+        that.page++
+        that.logs = response
       })
     }
   }
@@ -20485,23 +20500,19 @@ var getLogsPath = 'http://localhost:8081/api/admin/city/logs'
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.visible === true) ? _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
+  return (_vm.visible === true) ? _c('div', [_c('div', {
     staticClass: "card"
   }, [_c('div', {
     staticClass: "card-content"
-  }, [_vm._t("title"), _vm._v(" "), _vm._t("content")], 2), _vm._v(" "), _c('footer', {
+  }, [_vm._t("title"), _vm._v(" "), _vm._t("content")], 2), _vm._v(" "), _vm._m(0)])]) : _vm._e()
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('footer', {
     staticClass: "card-footer"
   }, [_c('a', {
-    staticClass: "card-footer-item",
-    attrs: {
-      "href": _vm.link,
-      "target": "_blank"
-    }
-  }, [_vm._v("Read More")])])])]) : _vm._e()
-}
-var staticRenderFns = []
+    staticClass: "card-footer-item"
+  }, [_vm._v("\n        Read More\n      ")])])
+}]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

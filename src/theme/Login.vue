@@ -24,7 +24,7 @@
     import Icon from 'vue-awesome/components/Icon.vue'
     import EventBus from '../util/EventBus'
     var $ = require('jquery')
-    var tokenPath = 'http://52.14.168.26:8081/api/security/login'
+    var tokenPath = 'http://localhost:8081/api/security/login'
     var apiCall = require("../util/APIcall.js")
     export default {
         name: 'Login',
@@ -35,7 +35,8 @@
                     username: "",
                     password: ""
                 },
-                visible: false
+                visible: false,
+                isUser: false
             }
         },
         created: function(){
@@ -43,14 +44,25 @@
           EventBus.$on('TOKEN_NEEDED', () =>{
             that.visible = true
           })
+          EventBus.$on('USER_TOKEN_NEEDED', () =>{
+            that.visible = true
+            that.isUser = true;
+          })
+
         },
         methods: {
           login: function login() {
             if(this.input.username != "" && this.input.password != "") {
                 var that = this
-                var tokenPromise = apiCall.APItoken(tokenPath, 'admin', 'password', 'ADMIN')
+                var tokenPromise = apiCall.APItoken(tokenPath, that.input.username, that.input.password, that.isUser ? 'ClIENT' : 'ADMIN')
                 tokenPromise.done( function (data, status, response) {
-                  EventBus.$emit('TOKEN_AVAILABLE', response)
+                  console.log("login: " + response)
+                  if (that.isUser){
+                    EventBus.$emit('USER_TOKEN_AVAILABLE', response.responseText)
+                  }
+                  else{
+                    EventBus.$emit('TOKEN_AVAILABLE', response)
+                  }
                   that.visible = false
                 }).fail(function (request, status, error) {
                   //TODO HANDLE THE CRASH MORE THOROUGHLY

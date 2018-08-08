@@ -1,13 +1,14 @@
 <template>
-  <div v-if="visible === true" class="container">
+  <div v-if="visible === true">
     <div class="card">
       <div class="card-content">
         <slot name="title"></slot>
         <slot name="content"></slot>
       </div>
       <footer class="card-footer">
-        <a class="card-footer-item" :href="link"
-        target="_blank">Read More</a>
+        <a class="card-footer-item">
+          Read More
+        </a>
       </footer>
     </div>
   </div>
@@ -16,37 +17,40 @@
   import EventBus from '../util/EventBus'
   var apiCall = require("../util/APIcall.js")
   var $ = require('jquery')
-  var getLogsPath = 'http://localhost:8081/api/admin/city/logs'
+  var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=master&pageSize='
 
   export default {
     data: function(){
       return{
         logs: [],
+        pageSize: 10,
+        page:  0,
         visible: false,
         token: null
       }
     },
     created: function() {
       var that = this
-      EventBus.$on('ADMIN_TOKEN_AVAILABLE', (token)=>{
+      EventBus.$on('USER_TOKEN_AVAILABLE', (token)=>{
         that.token = token
-        //CALL getPermits here;
+        that.getPermits()
       })
       EventBus.$on('SHOW_PERMITS', ()=>{
-        EventBus.$emit('TOKEN_NEEDED')
+        EventBus.$emit('USER_TOKEN_NEEDED')
         that.visible = true
       })
       EventBus.$on('HIDE_PERMITS', ()=>{
-        that.visible = false;
+        that.visible = false
       })
     },
     methods: {
       getPermits: function () {
-        var that = this;
-        apiCall.APIget(getLogsPath, that.token).done(function(response){
-
-          that.logs = response;
-          that.visible = true;
+        var that = this
+        debugger
+        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
+          debugger
+          that.page++
+          that.logs = response
         })
       }
     }
