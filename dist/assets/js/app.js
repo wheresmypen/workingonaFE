@@ -20450,6 +20450,15 @@ exports.push([module.i, "\n#logs ul {\n  -webkit-flex-direction: column;\n  flex
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var apiCall = __webpack_require__(6)
@@ -20459,7 +20468,7 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function(){
     return{
-      logs: [],
+      permits: [],
       pageSize: 10,
       page:  0,
       visible: false,
@@ -20487,9 +20496,12 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
       apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
         debugger
         that.page++
-        that.logs = response
+        that.permits = response
       })
     }
+  },
+  displayPermit: function(permitNumber){
+    console.log(permitNumber)
   }
 });
 
@@ -20500,19 +20512,38 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.visible === true) ? _c('div', [_c('div', {
-    staticClass: "card"
-  }, [_c('div', {
-    staticClass: "card-content"
-  }, [_vm._t("title"), _vm._v(" "), _vm._t("content")], 2), _vm._v(" "), _vm._m(0)])]) : _vm._e()
+  return (_vm.visible === true) ? _c('div', {
+    staticClass: "columns"
+  }, _vm._l((_vm.permits), function(permit) {
+    return _c('div', {
+      staticClass: "column"
+    }, [_c('div', {
+      staticClass: "card"
+    }, [_c('div', {
+      staticClass: "card-header"
+    }, [_c('p', {
+      staticClass: "card-header-title"
+    }, [_vm._v("\n            Total Value: " + _vm._s(permit.totalValue) + "\n          ")])]), _vm._v(" "), _c('div', {
+      staticClass: "card-content"
+    }, [_vm._v("\n            Address: " + _vm._s(permit.address)), _c('br'), _vm._v("\n            New Units: " + _vm._s(permit.newunits) + "\n            "), _c('p')]), _vm._v(" "), _c('div', {
+      staticClass: "card-footer"
+    }, [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.displayPermit(_vm.event)
+        }
+      }
+    }, [_c('input', {
+      attrs: {
+        "type": "hidden"
+      },
+      domProps: {
+        "value": permit.number
+      }
+    }), _vm._v("\n          Read More\n          ")])])])])
+  })) : _vm._e()
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('footer', {
-    staticClass: "card-footer"
-  }, [_c('a', {
-    staticClass: "card-footer-item"
-  }, [_vm._v("\n        Read More\n      ")])])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

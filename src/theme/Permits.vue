@@ -1,16 +1,25 @@
 <template>
-  <div v-if="visible === true">
-    <div class="card">
-      <div class="card-content">
-        <slot name="title"></slot>
-        <slot name="content"></slot>
+  <div class="columns" v-if="visible === true">
+      <div class="column" v-for="permit in permits">
+        <div class="card">
+          <div class="card-header">
+            <p class="card-header-title">
+              Total Value: {{permit.totalValue}}
+            </p>
+          </div>
+          <div class="card-content">
+              Address: {{permit.address}}<br/>
+              New Units: {{permit.newunits}}
+              </p>
+          </div>
+          <div class="card-footer">
+            <a @click="displayPermit(event)">
+            <input type="hidden" v-bind:value="permit.number" />
+            Read More
+            </a>
+          </div>
+        </div>
       </div>
-      <footer class="card-footer">
-        <a class="card-footer-item">
-          Read More
-        </a>
-      </footer>
-    </div>
   </div>
 </template>
 <script>
@@ -22,7 +31,7 @@
   export default {
     data: function(){
       return{
-        logs: [],
+        permits: [],
         pageSize: 10,
         page:  0,
         visible: false,
@@ -50,9 +59,12 @@
         apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
           debugger
           that.page++
-          that.logs = response
+          that.permits = response
         })
       }
+    },
+    displayPermit: function(permitNumber){
+      console.log(permitNumber)
     }
   }
 </script>
