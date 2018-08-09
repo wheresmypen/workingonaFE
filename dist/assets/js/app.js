@@ -20424,7 +20424,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#logs ul {\n  -webkit-flex-direction: column;\n  flex-direction: column;\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -20513,7 +20513,10 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return (_vm.visible === true) ? _c('div', {
-    staticClass: "columns"
+    staticClass: "columns",
+    attrs: {
+      "id": "permits"
+    }
   }, _vm._l((_vm.permits), function(permit) {
     return _c('div', {
       staticClass: "column"

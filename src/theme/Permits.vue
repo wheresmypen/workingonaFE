@@ -1,6 +1,6 @@
 <template>
-  <div class="columns" v-if="visible === true">
-      <div class="column" v-for="permit in permits">
+  <div id="permits" class="columns" v-if="visible === true">
+      <div  class="column" v-for="permit in permits">
         <div class="card">
           <div class="card-header">
             <p class="card-header-title">
@@ -69,8 +69,14 @@
   }
 </script>
 <style lang="scss">
-  #logs ul {
-      -webkit-flex-direction: column;
-      flex-direction: column;
+  #permits .column {
+      flex-basis: 33%;
+      flex-grow: 0;
+  }
+
+  @media (max-device-width: 1366px){
+    body{
+      font-size: 0.70rem;
+    }
   }
 </style>
