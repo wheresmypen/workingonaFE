@@ -25,9 +25,11 @@
   export default {
     methods: {
       showAdmin: function showAdmin(){
+        EventBus.$emit('HIDE_ALL')
         EventBus.$emit('ADMIN_SHOW')
       },
       showPermits: function showPermits(){
+        EventBus.$emit('HIDE_ALL')
         EventBus.$emit('SHOW_PERMITS')
       }
     }

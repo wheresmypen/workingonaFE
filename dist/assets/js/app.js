@@ -18926,9 +18926,11 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   methods: {
     showAdmin: function showAdmin(){
+      __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('HIDE_ALL')
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('ADMIN_SHOW')
     },
     showPermits: function showPermits(){
+      __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('HIDE_ALL')
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('SHOW_PERMITS')
     }
   }
@@ -19095,6 +19097,9 @@ if (false) {(function () {
       })
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('TOKEN_NEEDED')
       that.visible = true
+    })
+    __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('HIDE_ALL', function (){
+      that.visible = false;
     })
   },
   methods:{
@@ -19903,7 +19908,6 @@ var apiCall = __webpack_require__(6)
             var that = this
             var tokenPromise = apiCall.APItoken(tokenPath, that.input.username, that.input.password, that.isUser ? 'ClIENT' : 'ADMIN')
             tokenPromise.done( function (data, status, response) {
-              console.log("login: " + response)
               if (that.isUser){
                 __WEBPACK_IMPORTED_MODULE_1__util_EventBus__["a" /* default */].$emit('USER_TOKEN_AVAILABLE', response.responseText)
               }
@@ -19913,6 +19917,9 @@ var apiCall = __webpack_require__(6)
               that.visible = false
             }).fail(function (request, status, error) {
               //TODO HANDLE THE CRASH MORE THOROUGHLY
+            }).always(function(){
+              that.input.username = ''
+              that.input.password = ''
             })
         } else {
             //TODO ADD HTML5 Field validation
@@ -20424,7 +20431,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.50rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -20459,6 +20466,15 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var apiCall = __webpack_require__(6)
@@ -20469,7 +20485,7 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
   data: function(){
     return{
       permits: [],
-      pageSize: 10,
+      pageSize: 9,
       page:  0,
       visible: false,
       token: null
@@ -20485,24 +20501,30 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
       __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('USER_TOKEN_NEEDED')
       that.visible = true
     })
-    __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('HIDE_PERMITS', ()=>{
+    __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$on('HIDE_ALL', ()=>{
       that.visible = false
     })
   },
   methods: {
     getPermits: function () {
       var that = this
-      debugger
       apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
-        debugger
+        that.page++
+        that.permits = response
+      })
+    },
+    displayPermit: function(permitNumber){
+      console.log(permitNumber)
+    },
+    loadNext : function(){
+      var that = this
+      apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
         that.page++
         that.permits = response
       })
     }
   },
-  displayPermit: function(permitNumber){
-    console.log(permitNumber)
-  }
+
 });
 
 
@@ -20512,7 +20534,7 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.visible === true) ? _c('div', {
+  return (_vm.visible === true) ? _c('div', [_c('div', {
     staticClass: "columns",
     attrs: {
       "id": "permits"
@@ -20526,9 +20548,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "card-header"
     }, [_c('p', {
       staticClass: "card-header-title"
-    }, [_vm._v("\n            Total Value: " + _vm._s(permit.totalValue) + "\n          ")])]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n              Total Value: " + _vm._s(permit.totalValue) + "\n            ")])]), _vm._v(" "), _c('div', {
       staticClass: "card-content"
-    }, [_vm._v("\n            Address: " + _vm._s(permit.address)), _c('br'), _vm._v("\n            New Units: " + _vm._s(permit.newunits) + "\n            "), _c('p')]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n              Address: " + _vm._s(permit.address)), _c('br'), _vm._v("\n              New Units: " + _vm._s(permit.newunits) + "\n              "), _c('p')]), _vm._v(" "), _c('div', {
       staticClass: "card-footer"
     }, [_c('a', {
       on: {
@@ -20543,8 +20565,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       domProps: {
         "value": permit.number
       }
-    }), _vm._v("\n          Read More\n          ")])])])])
-  })) : _vm._e()
+    }), _vm._v("\n            Read More\n            ")])])])])
+  })), _vm._v(" "), _c('div', {
+    staticClass: "level"
+  }, [_c('div', {
+    staticClass: "level-right"
+  }, [_c('div', {
+    staticClass: "level-item"
+  }, [_c('a', {
+    staticClass: "button is-primary",
+    on: {
+      "click": _vm.loadNext
+    }
+  }, [_vm._v("Next")])])])])]) : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

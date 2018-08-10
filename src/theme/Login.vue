@@ -56,7 +56,6 @@
                 var that = this
                 var tokenPromise = apiCall.APItoken(tokenPath, that.input.username, that.input.password, that.isUser ? 'ClIENT' : 'ADMIN')
                 tokenPromise.done( function (data, status, response) {
-                  console.log("login: " + response)
                   if (that.isUser){
                     EventBus.$emit('USER_TOKEN_AVAILABLE', response.responseText)
                   }
@@ -66,6 +65,9 @@
                   that.visible = false
                 }).fail(function (request, status, error) {
                   //TODO HANDLE THE CRASH MORE THOROUGHLY
+                }).always(function(){
+                  that.input.username = ''
+                  that.input.password = ''
                 })
             } else {
                 //TODO ADD HTML5 Field validation

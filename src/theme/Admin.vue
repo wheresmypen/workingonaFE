@@ -53,6 +53,9 @@
         EventBus.$emit('TOKEN_NEEDED')
         that.visible = true
       })
+      EventBus.$on('HIDE_ALL', function (){
+        that.visible = false;
+      })
     },
     methods:{
       showCityTab: function (){
