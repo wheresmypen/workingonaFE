@@ -22,9 +22,16 @@
           </div>
         </div>
     </div>
-    <div class="level-right">
-      <div class="level-item">
-        <a class="button is-primary" @click="loadNext">Next</a>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <a class="button is-primary" @click="loadPrevious">Previous</a>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <a class="button is-primary" @click="loadNext">Next</a>
+        </div>
       </div>
     </div>
   </div>
@@ -76,7 +83,16 @@
           that.page++
           that.permits = response
         })
+      },
+      loadPrevious : function(){
+        var that = this
+        that.page -= 2
+        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
+          that.page++
+          that.permits = response
+        })
       }
+
     },
 
   }

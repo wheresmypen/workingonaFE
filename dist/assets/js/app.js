@@ -20475,6 +20475,11 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 var apiCall = __webpack_require__(6)
@@ -20522,7 +20527,16 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=
         that.page++
         that.permits = response
       })
+    },
+    loadPrevious : function(){
+      var that = this
+      that.page -= 2
+      apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
+        that.page++
+        that.permits = response
+      })
     }
+
   },
 
 });
@@ -20569,6 +20583,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })), _vm._v(" "), _c('div', {
     staticClass: "level"
   }, [_c('div', {
+    staticClass: "level-left"
+  }, [_c('div', {
+    staticClass: "level-item"
+  }, [_c('a', {
+    staticClass: "button is-primary",
+    on: {
+      "click": _vm.loadPrevious
+    }
+  }, [_vm._v("Previous")])])]), _vm._v(" "), _c('div', {
     staticClass: "level-right"
   }, [_c('div', {
     staticClass: "level-item"
