@@ -32,7 +32,7 @@
     data: function(){
       return{
         permits: [],
-        pageSize: 10,
+        pageSize: 9,
         page:  0,
         visible: false,
         token: null
@@ -79,4 +79,11 @@
       font-size: 0.70rem;
     }
   }
+
+  @media (max-device-width: 1024px){
+    body{
+      font-size: 0.45rem;
+    }
+  }
+
 </style>

@@ -20424,7 +20424,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.50rem;\n}\n}\n", ""]);
 
 // exports
 
