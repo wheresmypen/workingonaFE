@@ -6,6 +6,7 @@
         <span class="icon is-small">
           <icon name="building"></icon>
         </span>
+        Permits
       </a>
     </div>
     </div>

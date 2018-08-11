@@ -13,8 +13,8 @@
                 New Units: {{permit.newunits}}
                 </p>
             </div>
-            <div class="card-footer">
-              <a @click="displayPermit(event)">
+            <div class="card-footer has-text-centered">
+              <a v-on:click="displayPermit">
               <input type="hidden" v-bind:value="permit.number" />
               Read More
               </a>
@@ -34,15 +34,21 @@
         </div>
       </div>
     </div>
+    <permitdetail></permitdetail>
   </div>
 </template>
 <script>
   import EventBus from '../util/EventBus'
+  import PermitDetail from './PermitDetail.vue'
   var apiCall = require("../util/APIcall.js")
   var $ = require('jquery')
   var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=master&pageSize='
 
   export default {
+    name: 'Permits',
+    components: {
+      'permitdetail': PermitDetail
+    },
     data: function(){
       return{
         permits: [],
@@ -69,32 +75,38 @@
     methods: {
       getPermits: function () {
         var that = this
-        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
-          that.page++
+        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
           that.permits = response
         })
       },
       displayPermit: function(permitNumber){
-        console.log(permitNumber)
+        var permit = this.permits.find(function(permit){
+          if (permit.number === permitNumber.target.children[0].getAttribute("value")){
+            return permit
+          }
+        })
+        EventBus.$emit('SHOW_PERMIT_DETAIL', permit)
       },
       loadNext : function(){
         var that = this
-        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
-          that.page++
+        this.page += 1
+        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
           that.permits = response
         })
       },
       loadPrevious : function(){
         var that = this
-        that.page -= 2
-        apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + that.page , that.token).done(function(response){
-          that.page++
-          that.permits = response
-        })
+        this.page -= 1
+        if (this.page >= 0){
+          apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
+            that.permits = response
+          })
+        }
+        else{
+          this.page = 0
+        }
       }
-
     },
-
   }
 </script>
 <style lang="scss">
