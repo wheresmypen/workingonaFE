@@ -20633,6 +20633,80 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20671,12 +20745,98 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_c('div', {
     staticClass: "modal-background"
   }), _vm._v(" "), _c('div', {
-    staticClass: "modal-content"
+    staticClass: "modal-card"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "modal-card-body"
+  }, [_c('div', {
+    staticClass: "columns"
+  }, [_c('div', {
+    staticClass: "column is-half"
   }, [_c('div', {
     staticClass: "field is-expanded"
   }, [_c('div', {
     staticClass: "field has-addons"
-  }, [_vm._m(0), _vm._v(" "), _c('p', {
+  }, [_vm._m(1), _vm._v(" "), _c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.permit.number),
+      expression: "permit.number"
+    }],
+    staticClass: "input",
+    attrs: {
+      "readonly": ""
+    },
+    domProps: {
+      "value": (_vm.permit.number)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.permit.number = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "field is-expanded"
+  }, [_c('div', {
+    staticClass: "field has-addons"
+  }, [_vm._m(2), _vm._v(" "), _c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.permit.newcase),
+      expression: "permit.newcase"
+    }],
+    staticClass: "input",
+    attrs: {
+      "readonly": ""
+    },
+    domProps: {
+      "value": (_vm.permit.newcase)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.permit.newcase = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "field is-expanded"
+  }, [_c('div', {
+    staticClass: "field has-addons"
+  }, [_vm._m(3), _vm._v(" "), _c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.permit.status),
+      expression: "permit.status"
+    }],
+    staticClass: "input",
+    attrs: {
+      "readonly": ""
+    },
+    domProps: {
+      "value": (_vm.permit.status)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.permit.status = $event.target.value
+      }
+    }
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "column is-half"
+  }, [_c('div', {
+    staticClass: "field is-expanded"
+  }, [_c('div', {
+    staticClass: "field has-addons"
+  }, [_vm._m(4), _vm._v(" "), _c('p', {
     staticClass: "control is-expanded"
   }, [_c('input', {
     directives: [{
@@ -20698,7 +20858,59 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.permit.totalValue = $event.target.value
       }
     }
-  })])])])]), _vm._v(" "), _c('button', {
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "field is-expanded"
+  }, [_c('div', {
+    staticClass: "field has-addons"
+  }, [_vm._m(5), _vm._v(" "), _c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.permit.address),
+      expression: "permit.address"
+    }],
+    staticClass: "input",
+    attrs: {
+      "readonly": ""
+    },
+    domProps: {
+      "value": (_vm.permit.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.permit.address = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "field is-expanded"
+  }, [_c('div', {
+    staticClass: "field has-addons"
+  }, [_vm._m(6), _vm._v(" "), _c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.permit.category),
+      expression: "permit.category"
+    }],
+    staticClass: "input",
+    attrs: {
+      "readonly": ""
+    },
+    domProps: {
+      "value": (_vm.permit.category)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.permit.category = $event.target.value
+      }
+    }
+  })])])])])])]), _vm._v(" "), _vm._m(7)]), _vm._v(" "), _c('button', {
     staticClass: "modal-close is-large",
     attrs: {
       "aria-label": "close"
@@ -20709,11 +20921,51 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })])]) : _vm._e()
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-card-head"
+  }, [_c('p', {
+    staticClass: "modal-class-title"
+  }, [_vm._v("Permit Detail")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', {
     staticClass: "control"
   }, [_c('a', {
     staticClass: "button is-static"
-  }, [_vm._v("\n              Amount\n            ")])])
+  }, [_vm._v("\n                    Number\n                  ")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "control"
+  }, [_c('a', {
+    staticClass: "button is-static"
+  }, [_vm._v("\n                    New\n                  ")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "control"
+  }, [_c('a', {
+    staticClass: "button is-static"
+  }, [_vm._v("\n                    Status\n                  ")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "control"
+  }, [_c('a', {
+    staticClass: "button is-static"
+  }, [_vm._v("\n                    Amount\n                  ")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "control"
+  }, [_c('a', {
+    staticClass: "button is-static"
+  }, [_vm._v("\n                    Address\n                  ")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "control"
+  }, [_c('a', {
+    staticClass: "button is-static"
+  }, [_vm._v("\n                    Category\n                  ")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "modal-card-footer"
+  }, [_c('p', [_vm._v("Buttons here")])])
 }]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -20747,7 +20999,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "card-header-title"
     }, [_vm._v("\n              Total Value: " + _vm._s(permit.totalValue) + "\n            ")])]), _vm._v(" "), _c('div', {
       staticClass: "card-content"
-    }, [_vm._v("\n              Address: " + _vm._s(permit.address)), _c('br'), _vm._v("\n              New Units: " + _vm._s(permit.newunits) + "\n              "), _c('p')]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n              " + _vm._s(permit.address)), _c('br'), _vm._v("\n              New Units: " + _vm._s(permit.newunits) + "\n              "), _c('p')]), _vm._v(" "), _c('div', {
       staticClass: "card-footer has-text-centered"
     }, [_c('a', {
       on: {
