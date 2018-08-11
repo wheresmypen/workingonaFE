@@ -20488,7 +20488,7 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 
 var apiCall = __webpack_require__(6)
 var $ = __webpack_require__(5)
-var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=master&pageSize='
+var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'Permits',

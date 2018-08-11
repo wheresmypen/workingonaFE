@@ -9,7 +9,7 @@
               </p>
             </div>
             <div class="card-content">
-                Address: {{permit.address}}<br/>
+                {{permit.address}}<br/>
                 New Units: {{permit.newunits}}
                 </p>
             </div>
@@ -42,7 +42,7 @@
   import PermitDetail from './PermitDetail.vue'
   var apiCall = require("../util/APIcall.js")
   var $ = require('jquery')
-  var getPermitsPath = 'http://localhost:8081/api/client/city?area=boluder&report=master&pageSize='
+  var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
 
   export default {
     name: 'Permits',
