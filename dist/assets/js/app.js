@@ -18425,6 +18425,10 @@ __WEBPACK_IMPORTED_MODULE_0__app__["a" /* app */].$mount('#app')
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_vue_awesome_icons_wrench__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_vue_awesome_icons_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_vue_awesome_icons_book__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_awesome_icons_filter__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_vue_awesome_icons_sort__ = __webpack_require__(62);
+
+
 
 
 
@@ -20483,6 +20487,15 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20523,6 +20536,8 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=
       var that = this
       apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
         that.permits = response
+      }).fail(function(){
+        __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('USER_TOKEN_NEEDED')
       })
     },
     displayPermit: function(permitNumber){
@@ -20538,6 +20553,8 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=
       this.page += 1
       apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
         that.permits = response
+      }).fail(function(){
+        __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('USER_TOKEN_NEEDED')
       })
     },
     loadPrevious : function(){
@@ -20546,6 +20563,8 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=
       if (this.page >= 0){
         apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
           that.permits = response
+        }).fail(function(){
+          __WEBPACK_IMPORTED_MODULE_0__util_EventBus__["a" /* default */].$emit('USER_TOKEN_NEEDED')
         })
       }
       else{
@@ -20983,7 +21002,19 @@ if (false) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.visible === true) ? _c('div', [_c('div', {
+  return (_vm.visible === true) ? _c('div', [_c('a', [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('icon', {
+    attrs: {
+      "name": "filter"
+    }
+  })], 1), _vm._v("\n    or\n    "), _c('span', {
+    staticClass: "icon is-small"
+  }, [_c('icon', {
+    attrs: {
+      "name": "sort"
+    }
+  })], 1)]), _vm._v(" "), _c('div', {
     staticClass: "columns",
     attrs: {
       "id": "permits"
@@ -21192,6 +21223,28 @@ __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({
 
 
 __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"book":{"width":1664,"height":1792,"paths":[{"d":"M1639 478q40 57 18 129l-275 906q-19 64-76.5 107.5t-122.5 43.5h-923q-77 0-148.5-53.5t-99.5-131.5q-24-67-2-127 0-4 3-27t4-37q1-8-3-21.5t-3-19.5q2-11 8-21t16.5-23.5 16.5-23.5q23-38 45-91.5t30-91.5q3-10 0.5-30t-0.5-28q3-11 17-28t17-23q21-36 42-92t25-90q1-9-2.5-32t0.5-28q4-13 22-30.5t22-22.5q19-26 42.5-84.5t27.5-96.5q1-8-3-25.5t-2-26.5q2-8 9-18t18-23 17-21q8-12 16.5-30.5t15-35 16-36 19.5-32 26.5-23.5 36-11.5 47.5 5.5l-1 3q38-9 51-9h761q74 0 114 56t18 130l-274 906q-36 119-71.5 153.5t-128.5 34.5h-869q-27 0-38 15-11 16-1 43 24 70 144 70h923q29 0 56-15.5t35-41.5l300-987q7-22 5-57 38 15 59 43zM575 480q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5t16.5-22.5l21-64q4-13-2-22.5t-20-9.5h-608q-13 0-25.5 9.5t-16.5 22.5zM492 736q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5t16.5-22.5l21-64q4-13-2-22.5t-20-9.5h-608q-13 0-25.5 9.5t-16.5 22.5z"}]}})
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
+
+
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"filter":{"width":1408,"height":1792,"paths":[{"d":"M1403 295q17 41-14 70l-493 493v742q0 42-39 59-13 5-25 5-27 0-45-19l-256-256q-19-19-19-45v-486l-493-493q-31-29-14-70 17-39 59-39h1280q42 0 59 39z"}]}})
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
+
+
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"sort":{"width":1024,"height":1792,"paths":[{"d":"M1024 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zM1024 704q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"}]}})
 
 
 /***/ })

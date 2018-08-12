@@ -11,6 +11,8 @@ import 'vue-awesome/icons/building'
 import 'vue-awesome/icons/wrench'
 import 'vue-awesome/icons/map'
 import 'vue-awesome/icons/book'
+import 'vue-awesome/icons/filter'
+import 'vue-awesome/icons/sort'
 
 Vue.component('icon', Icon)
 

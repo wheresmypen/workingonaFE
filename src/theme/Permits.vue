@@ -1,5 +1,14 @@
 <template>
   <div v-if="visible === true">
+    <a>
+      <span class="icon is-small">
+        <icon name="filter"></icon>
+      </span>
+      or
+      <span class="icon is-small">
+        <icon name="sort"></icon>
+      </span>
+    </a>
     <div id="permits" class="columns">
         <div  class="column" v-for="permit in permits">
           <div class="card">
@@ -77,6 +86,8 @@
         var that = this
         apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
           that.permits = response
+        }).fail(function(){
+          EventBus.$emit('USER_TOKEN_NEEDED')
         })
       },
       displayPermit: function(permitNumber){
@@ -92,6 +103,8 @@
         this.page += 1
         apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
           that.permits = response
+        }).fail(function(){
+          EventBus.$emit('USER_TOKEN_NEEDED')
         })
       },
       loadPrevious : function(){
@@ -100,6 +113,8 @@
         if (this.page >= 0){
           apiCall.APIget(getPermitsPath + that.pageSize + '&page=' + this.page , that.token).done(function(response){
             that.permits = response
+          }).fail(function(){
+            EventBus.$emit('USER_TOKEN_NEEDED')
           })
         }
         else{
