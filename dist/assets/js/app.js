@@ -19877,11 +19877,12 @@ exports.push([module.i, "\n.modal-content > input[data-v-63d7a1d0] {\n  margin-b
 //
 //
 //
+//
 
 
 
 var $ = __webpack_require__(5)
-var tokenPath = 'http://localhost:8081/api/security/login'
+var tokenPath = 'http://52.14.168.26:8081/api/security/login'
 var apiCall = __webpack_require__(6)
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: 'Login',
@@ -19930,6 +19931,9 @@ var apiCall = __webpack_require__(6)
             //TODO ADD HTML5 Field validation
             console.log("A username and password must be present")
         }
+      },
+    close: function(){
+        this.visible = false
       }
     }
  });
@@ -20335,7 +20339,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     on: {
       "click": _vm.login
     }
-  })])])]) : _vm._e()
+  })]), _vm._v(" "), _c('button', {
+    staticClass: "modal-close is-large",
+    attrs: {
+      "aria-label": "close"
+    },
+    on: {
+      "click": _vm.close
+    }
+  })])]) : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20436,7 +20448,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n.panel {\n  height: 100%;\n  width: 0;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #111;\n  overflow-x: hidden;\n  transition: 0.5s;\n  padding-top: 60px;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -20496,12 +20508,18 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
 var apiCall = __webpack_require__(6)
 var $ = __webpack_require__(5)
-var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
+var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&report=master&pageSize='
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'Permits',
@@ -20514,6 +20532,7 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=
       pageSize: 9,
       page:  0,
       visible: false,
+      showCustomize : false,
       token: null
     }
   },
@@ -20570,8 +20589,11 @@ var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=
       else{
         this.page = 0
       }
+    },
+    showCustomizePanel : function(){
+      this.showCustomize = true
     }
-  },
+  }
 });
 
 
@@ -21002,19 +21024,21 @@ if (false) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.visible === true) ? _c('div', [_c('a', [_c('span', {
-    staticClass: "icon is-small"
-  }, [_c('icon', {
-    attrs: {
-      "name": "filter"
+  return (_vm.visible === true) ? _c('div', [_c('a', {
+    on: {
+      "click": _vm.showCustomizePanel
     }
-  })], 1), _vm._v("\n    or\n    "), _c('span', {
+  }, [_c('span', {
     staticClass: "icon is-small"
   }, [_c('icon', {
     attrs: {
       "name": "sort"
     }
-  })], 1)]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v("\n    Customize\n  ")]), _vm._v(" "), (_vm.showCustomize === true) ? _c('div', {
+    staticClass: "panel"
+  }, [_c('p', {
+    staticClass: "panel-heading"
+  }, [_vm._v("\n      Fields\n    ")]), _vm._v(" "), _vm._m(0)]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "columns",
     attrs: {
       "id": "permits"
@@ -21066,7 +21090,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("Next")])])])]), _vm._v(" "), _c('permitdetail')], 1) : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('p', {
+    staticClass: "panel-tabs"
+  }, [_c('a', [_vm._v("Sort")]), _vm._v(" "), _c('a', [_vm._v("Filter")])])
+}]
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

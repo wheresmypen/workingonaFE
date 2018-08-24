@@ -17,6 +17,7 @@
           </p>
           <input class="input is-primary is-rounded has-background-primary has-text-white" type="submit" @click="login" value="Login" />
         </div>
+        <button class="modal-close is-large" aria-label="close" @click="close"></button>
       </div>
     </div>
 </template>
@@ -24,7 +25,7 @@
     import Icon from 'vue-awesome/components/Icon.vue'
     import EventBus from '../util/EventBus'
     var $ = require('jquery')
-    var tokenPath = 'http://localhost:8081/api/security/login'
+    var tokenPath = 'http://52.14.168.26:8081/api/security/login'
     var apiCall = require("../util/APIcall.js")
     export default {
         name: 'Login',
@@ -73,6 +74,9 @@
                 //TODO ADD HTML5 Field validation
                 console.log("A username and password must be present")
             }
+          },
+        close: function(){
+            this.visible = false
           }
         }
      }

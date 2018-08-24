@@ -1,14 +1,20 @@
 <template>
   <div v-if="visible === true">
-    <a>
-      <span class="icon is-small">
-        <icon name="filter"></icon>
-      </span>
-      or
+    <a @click="showCustomizePanel">
       <span class="icon is-small">
         <icon name="sort"></icon>
       </span>
+      Customize
     </a>
+    <div class="panel" v-if="showCustomize === true">
+      <p class="panel-heading">
+        Fields
+      </p>
+      <p class="panel-tabs">
+        <a>Sort</a>
+        <a>Filter</a>
+      </p>
+    </div>
     <div id="permits" class="columns">
         <div  class="column" v-for="permit in permits">
           <div class="card">
@@ -51,7 +57,7 @@
   import PermitDetail from './PermitDetail.vue'
   var apiCall = require("../util/APIcall.js")
   var $ = require('jquery')
-  var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
+  var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&report=master&pageSize='
 
   export default {
     name: 'Permits',
@@ -64,6 +70,7 @@
         pageSize: 9,
         page:  0,
         visible: false,
+        showCustomize : false,
         token: null
       }
     },
@@ -120,14 +127,30 @@
         else{
           this.page = 0
         }
+      },
+      showCustomizePanel : function(){
+        this.showCustomize = true
       }
-    },
+    }
   }
 </script>
 <style lang="scss">
   #permits .column {
       flex-basis: 33%;
       flex-grow: 0;
+  }
+
+  .panel{
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
   }
 
   @media (max-device-width: 1366px){
