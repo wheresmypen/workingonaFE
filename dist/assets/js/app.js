@@ -18425,9 +18425,7 @@ __WEBPACK_IMPORTED_MODULE_0__app__["a" /* app */].$mount('#app')
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_vue_awesome_icons_wrench__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_vue_awesome_icons_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_vue_awesome_icons_book__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_awesome_icons_filter__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_vue_awesome_icons_sort__ = __webpack_require__(62);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_awesome_icons_chevron_down__ = __webpack_require__(61);
 
 
 
@@ -20448,7 +20446,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n.panel {\n  height: 100%;\n  width: 0;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #111;\n  overflow-x: hidden;\n  transition: 0.5s;\n  padding-top: 60px;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -20460,6 +20458,45 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_EventBus__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PermitDetail_vue__ = __webpack_require__(46);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20591,7 +20628,7 @@ var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&repo
       }
     },
     showCustomizePanel : function(){
-      this.showCustomize = true
+       this.showCustomize = true
     }
   }
 });
@@ -21032,18 +21069,82 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "icon is-small"
   }, [_c('icon', {
     attrs: {
-      "name": "sort"
+      "name": "chevron-down"
     }
-  })], 1), _vm._v("\n    Customize\n  ")]), _vm._v(" "), (_vm.showCustomize === true) ? _c('div', {
-    staticClass: "panel"
-  }, [_c('p', {
-    staticClass: "panel-heading"
-  }, [_vm._v("\n      Fields\n    ")]), _vm._v(" "), _vm._m(0)]) : _vm._e(), _vm._v(" "), _c('div', {
+  })], 1)]), _vm._v(" "), _c('div', {
     staticClass: "columns",
     attrs: {
       "id": "permits"
     }
-  }, _vm._l((_vm.permits), function(permit) {
+  }, [_c('transition', {
+    staticClass: "column",
+    attrs: {
+      "name": "fade"
+    }
+  }, [(_vm.showCustomize === true) ? _c('div', {
+    staticClass: "panel",
+    attrs: {
+      "id": "filtersPanel"
+    }
+  }, [_c('p', {
+    staticClass: "panel-heading"
+  }, [_vm._v("\n            Fields\n          ")]), _vm._v(" "), _c('p', {
+    staticClass: "panel-tabs"
+  }, [_c('a', [_vm._v("Sort")])]), _vm._v(" "), _c('label', {
+    staticClass: "panel-block"
+  }, [_vm._v("\n            Field 1\n            "), _c('div', {
+    staticClass: "control"
+  }, [_c('label', {
+    staticClass: "radio"
+  }, [_vm._v("\n                Ascending\n                "), _c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "direction"
+    }
+  })]), _vm._v(" "), _c('label', {
+    staticClass: "radio"
+  }, [_vm._v("\n                Descending\n                "), _c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "direction"
+    }
+  })])])]), _vm._v(" "), _c('label', {
+    staticClass: "panel-block"
+  }, [_vm._v("\n            Field 2\n            "), _c('div', {
+    staticClass: "control"
+  }, [_c('label', {
+    staticClass: "radio"
+  }, [_vm._v("\n                Ascending\n                "), _c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "direction"
+    }
+  })]), _vm._v(" "), _c('label', {
+    staticClass: "radio"
+  }, [_vm._v("\n                Descending\n                "), _c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "direction"
+    }
+  })])])]), _vm._v(" "), _c('label', {
+    staticClass: "panel-block"
+  }, [_vm._v("\n            Field 3\n            "), _c('div', {
+    staticClass: "control"
+  }, [_c('label', {
+    staticClass: "radio"
+  }, [_vm._v("\n                Ascending\n                "), _c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "direction"
+    }
+  })]), _vm._v(" "), _c('label', {
+    staticClass: "radio"
+  }, [_vm._v("\n                Descending\n                "), _c('input', {
+    attrs: {
+      "type": "radio",
+      "name": "direction"
+    }
+  })])])])]) : _vm._e()]), _vm._v(" "), _vm._l((_vm.permits), function(permit) {
     return _c('div', {
       staticClass: "column"
     }, [_c('div', {
@@ -21068,7 +21169,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "value": permit.number
       }
     }), _vm._v("\n            Read More\n            ")])])])])
-  })), _vm._v(" "), _c('div', {
+  })], 2), _vm._v(" "), _c('div', {
     staticClass: "level"
   }, [_c('div', {
     staticClass: "level-left"
@@ -21090,11 +21191,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }, [_vm._v("Next")])])])]), _vm._v(" "), _c('permitdetail')], 1) : _vm._e()
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('p', {
-    staticClass: "panel-tabs"
-  }, [_c('a', [_vm._v("Sort")]), _vm._v(" "), _c('a', [_vm._v("Filter")])])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -21261,18 +21358,7 @@ __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
 
 
-__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"filter":{"width":1408,"height":1792,"paths":[{"d":"M1403 295q17 41-14 70l-493 493v742q0 42-39 59-13 5-25 5-27 0-45-19l-256-256q-19-19-19-45v-486l-493-493q-31-29-14-70 17-39 59-39h1280q42 0 59 39z"}]}})
-
-
-/***/ }),
-/* 62 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
-
-
-__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"sort":{"width":1024,"height":1792,"paths":[{"d":"M1024 1088q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45zM1024 704q0 26-19 45t-45 19h-896q-26 0-45-19t-19-45 19-45l448-448q19-19 45-19t45 19l448 448q19 19 19 45z"}]}})
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"chevron-down":{"width":1792,"height":1792,"paths":[{"d":"M1683 808l-742 741q-19 19-45 19t-45-19l-742-741q-19-19-19-45.5t19-45.5l166-165q19-19 45-19t45 19l531 531 531-531q19-19 45-19t45 19l166 165q19 19 19 45.5t-19 45.5z"}]}})
 
 
 /***/ })

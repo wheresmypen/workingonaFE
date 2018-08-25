@@ -2,20 +2,59 @@
   <div v-if="visible === true">
     <a @click="showCustomizePanel">
       <span class="icon is-small">
-        <icon name="sort"></icon>
+        <icon name="chevron-down"></icon>
       </span>
-      Customize
     </a>
-    <div class="panel" v-if="showCustomize === true">
-      <p class="panel-heading">
-        Fields
-      </p>
-      <p class="panel-tabs">
-        <a>Sort</a>
-        <a>Filter</a>
-      </p>
-    </div>
     <div id="permits" class="columns">
+        <transition class="column" name="fade">
+          <div id="filtersPanel" class="panel" v-if="showCustomize === true">
+            <p class="panel-heading">
+              Fields
+            </p>
+            <p class="panel-tabs">
+              <a>Sort</a>
+            </p>
+            <label class="panel-block">
+              Field 1
+              <div class="control">
+                <label class="radio">
+                  Ascending
+                  <input type="radio" name="direction">
+                </label>
+                <label class="radio">
+                  Descending
+                  <input type="radio" name="direction">
+                </label>
+              </div>
+            </label>
+            <label class="panel-block">
+              Field 2
+              <div class="control">
+                <label class="radio">
+                  Ascending
+                  <input type="radio" name="direction">
+                </label>
+                <label class="radio">
+                  Descending
+                  <input type="radio" name="direction">
+                </label>
+              </div>
+            </label>
+            <label class="panel-block">
+              Field 3
+              <div class="control">
+                <label class="radio">
+                  Ascending
+                  <input type="radio" name="direction">
+                </label>
+                <label class="radio">
+                  Descending
+                  <input type="radio" name="direction">
+                </label>
+              </div>
+            </label>
+          </div>
+        </transition>
         <div  class="column" v-for="permit in permits">
           <div class="card">
             <div class="card-header">
@@ -129,7 +168,7 @@
         }
       },
       showCustomizePanel : function(){
-        this.showCustomize = true
+         this.showCustomize = true
       }
     }
   }
@@ -140,17 +179,11 @@
       flex-grow: 0;
   }
 
-  .panel{
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      transition: 0.5s;
-      padding-top: 60px;
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 
   @media (max-device-width: 1366px){
