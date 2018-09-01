@@ -6,76 +6,82 @@
       </span>
     </a>
     <div id="permits" class="columns">
-        <transition class="column" name="fade">
-          <div id="filtersPanel" class="panel" v-if="showCustomize === true">
-            <p class="panel-heading">
-              Fields
-            </p>
-            <p class="panel-tabs">
-              <a>Sort</a>
-            </p>
-            <label class="panel-block">
-              Field 1
-              <div class="control">
-                <label class="radio">
-                  Ascending
-                  <input type="radio" name="direction">
-                </label>
-                <label class="radio">
-                  Descending
-                  <input type="radio" name="direction">
-                </label>
+        <transition name="fade">
+          <div class="column is-one-fifth" v-if="showCustomize === true">
+            <div id="filtersPanel" class="panel" >
+              <p class="panel-heading">
+                Fields
+              </p>
+              <p class="panel-tabs">
+                <a>Sort</a>
+              </p>
+              <div class="panel-block">
+                <div class="level">
+                  <div class="level-left">
+                    Address
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                      <a>
+                        <span class="icon is-small">
+                          <icon name="sort-alpha-asc"></icon>
+                        </span>
+                      </a>
+                    </div>
+                    <div class="level-item">
+                      <a>
+                        <span class="icon is-small">
+                          <icon name="sort-alpha-desc"></icon>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </label>
-            <label class="panel-block">
-              Field 2
-              <div class="control">
-                <label class="radio">
-                  Ascending
-                  <input type="radio" name="direction">
-                </label>
-                <label class="radio">
-                  Descending
-                  <input type="radio" name="direction">
-                </label>
+              <div class="panel-block">
+                Total Amount
+                  <a>
+                    <span class="icon is-small">
+                      <icon name="sort-amount-asc"></icon>
+                    </span>
+                  </a>
+                  <a>
+                    <span class="icon is-small">
+                      <icon name="sort-amount-desc"></icon>
+                    </span>
+                  </a>
               </div>
-            </label>
-            <label class="panel-block">
-              Field 3
-              <div class="control">
-                <label class="radio">
-                  Ascending
-                  <input type="radio" name="direction">
-                </label>
-                <label class="radio">
-                  Descending
-                  <input type="radio" name="direction">
-                </label>
+              <div class="panel-block">
+                <a class="button is-primary" @click="closeCustomizePanel">Close</a>
               </div>
-            </label>
+            </div>
           </div>
         </transition>
-        <div  class="column" v-for="permit in permits">
-          <div class="card">
-            <div class="card-header">
-              <p class="card-header-title">
-                Total Value: {{permit.totalValue}}
-              </p>
-            </div>
-            <div class="card-content">
-                {{permit.address}}<br/>
-                New Units: {{permit.newunits}}
-                </p>
-            </div>
-            <div class="card-footer has-text-centered">
-              <a v-on:click="displayPermit">
-              <input type="hidden" v-bind:value="permit.number" />
-              Read More
-              </a>
+        <div class="column">
+          <div class="columns">
+            <div  class="column" v-for="permit in permits">
+              <div class="card">
+                <div class="card-header">
+                  <p class="card-header-title">
+                    Total Value: {{permit.totalValue}}
+                  </p>
+                </div>
+                <div class="card-content">
+                    {{permit.address}}<br/>
+                    New Units: {{permit.newunits}}
+                    </p>
+                </div>
+                <div class="card-footer has-text-centered">
+                  <a v-on:click="displayPermit">
+                  <input type="hidden" v-bind:value="permit.number" />
+                  Read More
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-    </div>
+      </div>
     <div class="level">
       <div class="level-left">
         <div class="level-item">
@@ -169,6 +175,9 @@
       },
       showCustomizePanel : function(){
          this.showCustomize = true
+      },
+      closeCustomizePanel : function(){
+         this.showCustomize = false
       }
     }
   }
@@ -176,7 +185,6 @@
 <style lang="scss">
   #permits .column {
       flex-basis: 33%;
-      flex-grow: 0;
   }
 
   .fade-enter-active, .fade-leave-active {

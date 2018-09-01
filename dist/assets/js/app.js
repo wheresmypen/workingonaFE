@@ -18426,6 +18426,14 @@ __WEBPACK_IMPORTED_MODULE_0__app__["a" /* app */].$mount('#app')
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_vue_awesome_icons_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_vue_awesome_icons_book__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_vue_awesome_icons_chevron_down__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_vue_awesome_icons_sort_amount_asc__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_vue_awesome_icons_sort_amount_desc__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_vue_awesome_icons_sort_alpha_asc__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_vue_awesome_icons_sort_alpha_desc__ = __webpack_require__(65);
+
+
+
+
 
 
 
@@ -20446,7 +20454,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 0;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -20458,6 +20466,12 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n  flex-grow: 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_EventBus__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PermitDetail_vue__ = __webpack_require__(46);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20629,6 +20643,9 @@ var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&repo
     },
     showCustomizePanel : function(){
        this.showCustomize = true
+    },
+    closeCustomizePanel : function(){
+       this.showCustomize = false
     }
   }
 });
@@ -21077,74 +21094,70 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "id": "permits"
     }
   }, [_c('transition', {
-    staticClass: "column",
     attrs: {
       "name": "fade"
     }
   }, [(_vm.showCustomize === true) ? _c('div', {
+    staticClass: "column is-one-fifth"
+  }, [_c('div', {
     staticClass: "panel",
     attrs: {
       "id": "filtersPanel"
     }
   }, [_c('p', {
     staticClass: "panel-heading"
-  }, [_vm._v("\n            Fields\n          ")]), _vm._v(" "), _c('p', {
+  }, [_vm._v("\n              Fields\n            ")]), _vm._v(" "), _c('p', {
     staticClass: "panel-tabs"
-  }, [_c('a', [_vm._v("Sort")])]), _vm._v(" "), _c('label', {
+  }, [_c('a', [_vm._v("Sort")])]), _vm._v(" "), _c('div', {
     staticClass: "panel-block"
-  }, [_vm._v("\n            Field 1\n            "), _c('div', {
-    staticClass: "control"
-  }, [_c('label', {
-    staticClass: "radio"
-  }, [_vm._v("\n                Ascending\n                "), _c('input', {
+  }, [_c('div', {
+    staticClass: "level"
+  }, [_c('div', {
+    staticClass: "level-left"
+  }, [_vm._v("\n                  Address\n                ")]), _vm._v(" "), _c('div', {
+    staticClass: "level-right"
+  }, [_c('div', {
+    staticClass: "level-item"
+  }, [_c('a', [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('icon', {
     attrs: {
-      "type": "radio",
-      "name": "direction"
+      "name": "sort-alpha-asc"
     }
-  })]), _vm._v(" "), _c('label', {
-    staticClass: "radio"
-  }, [_vm._v("\n                Descending\n                "), _c('input', {
+  })], 1)])]), _vm._v(" "), _c('div', {
+    staticClass: "level-item"
+  }, [_c('a', [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('icon', {
     attrs: {
-      "type": "radio",
-      "name": "direction"
+      "name": "sort-alpha-desc"
     }
-  })])])]), _vm._v(" "), _c('label', {
+  })], 1)])])])])]), _vm._v(" "), _c('div', {
     staticClass: "panel-block"
-  }, [_vm._v("\n            Field 2\n            "), _c('div', {
-    staticClass: "control"
-  }, [_c('label', {
-    staticClass: "radio"
-  }, [_vm._v("\n                Ascending\n                "), _c('input', {
+  }, [_vm._v("\n              Total Amount\n                "), _c('a', [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('icon', {
     attrs: {
-      "type": "radio",
-      "name": "direction"
+      "name": "sort-amount-asc"
     }
-  })]), _vm._v(" "), _c('label', {
-    staticClass: "radio"
-  }, [_vm._v("\n                Descending\n                "), _c('input', {
+  })], 1)]), _vm._v(" "), _c('a', [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('icon', {
     attrs: {
-      "type": "radio",
-      "name": "direction"
+      "name": "sort-amount-desc"
     }
-  })])])]), _vm._v(" "), _c('label', {
+  })], 1)])]), _vm._v(" "), _c('div', {
     staticClass: "panel-block"
-  }, [_vm._v("\n            Field 3\n            "), _c('div', {
-    staticClass: "control"
-  }, [_c('label', {
-    staticClass: "radio"
-  }, [_vm._v("\n                Ascending\n                "), _c('input', {
-    attrs: {
-      "type": "radio",
-      "name": "direction"
+  }, [_c('a', {
+    staticClass: "button is-primary",
+    on: {
+      "click": _vm.closeCustomizePanel
     }
-  })]), _vm._v(" "), _c('label', {
-    staticClass: "radio"
-  }, [_vm._v("\n                Descending\n                "), _c('input', {
-    attrs: {
-      "type": "radio",
-      "name": "direction"
-    }
-  })])])])]) : _vm._e()]), _vm._v(" "), _vm._l((_vm.permits), function(permit) {
+  }, [_vm._v("Close")])])])]) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "column"
+  }, [_c('div', {
+    staticClass: "columns"
+  }, _vm._l((_vm.permits), function(permit) {
     return _c('div', {
       staticClass: "column"
     }, [_c('div', {
@@ -21153,9 +21166,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "card-header"
     }, [_c('p', {
       staticClass: "card-header-title"
-    }, [_vm._v("\n              Total Value: " + _vm._s(permit.totalValue) + "\n            ")])]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                  Total Value: " + _vm._s(permit.totalValue) + "\n                ")])]), _vm._v(" "), _c('div', {
       staticClass: "card-content"
-    }, [_vm._v("\n              " + _vm._s(permit.address)), _c('br'), _vm._v("\n              New Units: " + _vm._s(permit.newunits) + "\n              "), _c('p')]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                  " + _vm._s(permit.address)), _c('br'), _vm._v("\n                  New Units: " + _vm._s(permit.newunits) + "\n                  "), _c('p')]), _vm._v(" "), _c('div', {
       staticClass: "card-footer has-text-centered"
     }, [_c('a', {
       on: {
@@ -21168,8 +21181,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       domProps: {
         "value": permit.number
       }
-    }), _vm._v("\n            Read More\n            ")])])])])
-  })], 2), _vm._v(" "), _c('div', {
+    }), _vm._v("\n                Read More\n                ")])])])])
+  }))])], 1), _vm._v(" "), _c('div', {
     staticClass: "level"
   }, [_c('div', {
     staticClass: "level-left"
@@ -21359,6 +21372,50 @@ __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({
 
 
 __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"chevron-down":{"width":1792,"height":1792,"paths":[{"d":"M1683 808l-742 741q-19 19-45 19t-45-19l-742-741q-19-19-19-45.5t19-45.5l166-165q19-19 45-19t45 19l531 531 531-531q19-19 45-19t45 19l166 165q19 19 19 45.5t-19 45.5z"}]}})
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
+
+
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"sort-amount-asc":{"width":1792,"height":1792,"paths":[{"d":"M736 1440q0 12-10 24l-319 319q-10 9-23 9-12 0-23-9l-320-320q-15-16-7-35 8-20 30-20h192v-1376q0-14 9-23t23-9h192q14 0 23 9t9 23v1376h192q14 0 23 9t9 23zM1792 1568v192q0 14-9 23t-23 9h-832q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h832q14 0 23 9t9 23zM1600 1056v192q0 14-9 23t-23 9h-640q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h640q14 0 23 9t9 23zM1408 544v192q0 14-9 23t-23 9h-448q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h448q14 0 23 9t9 23zM1216 32v192q0 14-9 23t-23 9h-256q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h256q14 0 23 9t9 23z"}]}})
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
+
+
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"sort-amount-desc":{"width":1792,"height":1792,"paths":[{"d":"M1216 1568v192q0 14-9 23t-23 9h-256q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h256q14 0 23 9t9 23zM736 1440q0 12-10 24l-319 319q-10 9-23 9-12 0-23-9l-320-320q-15-16-7-35 8-20 30-20h192v-1376q0-14 9-23t23-9h192q14 0 23 9t9 23v1376h192q14 0 23 9t9 23zM1408 1056v192q0 14-9 23t-23 9h-448q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h448q14 0 23 9t9 23zM1600 544v192q0 14-9 23t-23 9h-640q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h640q14 0 23 9t9 23zM1792 32v192q0 14-9 23t-23 9h-832q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h832q14 0 23 9t9 23z"}]}})
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
+
+
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"sort-alpha-asc":{"width":1664,"height":1792,"paths":[{"d":"M1191 408h177l-72-218-12-47q-2-16-2-20h-4l-3 20q0 1-3.5 18t-7.5 29zM736 1440q0 12-10 24l-319 319q-10 9-23 9-12 0-23-9l-320-320q-15-16-7-35 8-20 30-20h192v-1376q0-14 9-23t23-9h192q14 0 23 9t9 23v1376h192q14 0 23 9t9 23zM1572 1559v233h-584v-90l369-529q12-18 21-27l11-9v-3q-2 0-6.5 0.5t-7.5 0.5q-12 3-30 3h-232v115h-120v-229h567v89l-369 530q-6 8-21 26l-11 11v2l14-2q9-2 30-2h248v-119h121zM1661 662v106h-288v-106h75l-47-144h-243l-47 144h75v106h-287v-106h70l230-662h162l230 662h70z"}]}})
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__ = __webpack_require__(0);
+
+
+__WEBPACK_IMPORTED_MODULE_0__components_Icon_vue__["a" /* default */].register({"sort-alpha-desc":{"width":1664,"height":1792,"paths":[{"d":"M1191 1432h177l-72-218-12-47q-2-16-2-20h-4l-3 20q0 1-3.5 18t-7.5 29zM736 1440q0 12-10 24l-319 319q-10 9-23 9-12 0-23-9l-320-320q-15-16-7-35 8-20 30-20h192v-1376q0-14 9-23t23-9h192q14 0 23 9t9 23v1376h192q14 0 23 9t9 23zM1661 1686v106h-288v-106h75l-47-144h-243l-47 144h75v106h-287v-106h70l230-662h162l230 662h70zM1572 535v233h-584v-90l369-529q12-18 21-27l11-9v-3q-2 0-6.5 0.5t-7.5 0.5q-12 3-30 3h-232v115h-120v-229h567v89l-369 530q-6 8-21 26l-11 10v3l14-3q9-1 30-1h248v-119h121z"}]}})
 
 
 /***/ })

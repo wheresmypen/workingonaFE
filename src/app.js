@@ -12,6 +12,10 @@ import 'vue-awesome/icons/wrench'
 import 'vue-awesome/icons/map'
 import 'vue-awesome/icons/book'
 import 'vue-awesome/icons/chevron-down'
+import 'vue-awesome/icons/sort-amount-asc'
+import 'vue-awesome/icons/sort-amount-desc'
+import 'vue-awesome/icons/sort-alpha-asc'
+import 'vue-awesome/icons/sort-alpha-desc'
 
 Vue.component('icon', Icon)
 
