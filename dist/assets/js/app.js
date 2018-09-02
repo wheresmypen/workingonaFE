@@ -19888,7 +19888,8 @@ exports.push([module.i, "\n.modal-content > input[data-v-63d7a1d0] {\n  margin-b
 
 
 var $ = __webpack_require__(5)
-var tokenPath = 'http://52.14.168.26:8081/api/security/login'
+//var tokenPath = 'http://52.14.168.26:8081/api/security/login'
+var tokenPath = 'http://localhost:8081/api/security/login'
 var apiCall = __webpack_require__(6)
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: 'Login',
@@ -20558,7 +20559,8 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n}\n#permits .
 
 var apiCall = __webpack_require__(6)
 var $ = __webpack_require__(5)
-var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&report=master&pageSize='
+var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
+var postUserSortInfo = 'http://localhost:8081/api/client/filters?userName=user&area=boulder'
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'Permits',
@@ -20658,8 +20660,12 @@ var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&repo
       }
     },
     applyNewFilterInfo: function (){
-      debugger
-      console.log(this.userSortInfo[0])
+      var that = this
+      apiCall.APIput(postUserSortInfo, this.token, this.userSortInfo).done(function(response){
+        that.showCustomize = false
+      }).fail(function(response){
+        //todo pop error
+      })
     }
   }
 });

@@ -90,7 +90,8 @@
   import PermitDetail from './PermitDetail.vue'
   var apiCall = require("../util/APIcall.js")
   var $ = require('jquery')
-  var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&report=master&pageSize='
+  var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
+  var postUserSortInfo = 'http://localhost:8081/api/client/filters?area=boulder'
 
   export default {
     name: 'Permits',
@@ -190,7 +191,12 @@
         }
       },
       applyNewFilterInfo: function (){
-        debugger
+        var that = this
+        apiCall.APIput(postUserSortInfo, this.token, this.userSortInfo).done(function(response){
+          that.showCustomize = false
+        }).fail(function(response){
+          //todo pop error
+        })
       }
     }
   }
