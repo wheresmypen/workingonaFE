@@ -15,44 +15,32 @@
               <p class="panel-tabs">
                 <a>Sort</a>
               </p>
-              <div class="panel-block">
-                <div class="level">
-                  <div class="level-left">
-                    Address
-                  </div>
-                  <div class="level-right">
-                    <div class="level-item">
-                      <a>
-                        <span class="icon is-small">
-                          <icon name="sort-alpha-asc"></icon>
-                        </span>
-                      </a>
+              <div class="panel-block" v-for="si in sortInfo">
+                {{si.label}}
+                <div class="control">
+                  <label class="radio">
+                    <div class="control">
+                      <div class="radio">
+                        asc.
+                        <input type="radio" v-bind:name="si.name" ascending="true" @click="changeSortDirection">
+                          <span class="icon is-small">
+                            <icon name="sort-alpha-asc"></icon>
+                          </span>
+                        </input>
+                        desc.
+                        <input type="radio" v-bind:name="si.name" ascending="false" @click="changeSortDirection">
+                          <span class="icon is-small">
+                            <icon name="sort-alpha-desc"></icon>
+                          </span>
+                        </input>
+                      </div>
                     </div>
-                    <div class="level-item">
-                      <a>
-                        <span class="icon is-small">
-                          <icon name="sort-alpha-desc"></icon>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
+                  </label>
                 </div>
               </div>
               <div class="panel-block">
-                Total Amount
-                  <a>
-                    <span class="icon is-small">
-                      <icon name="sort-amount-asc"></icon>
-                    </span>
-                  </a>
-                  <a>
-                    <span class="icon is-small">
-                      <icon name="sort-amount-desc"></icon>
-                    </span>
-                  </a>
-              </div>
-              <div class="panel-block">
                 <a class="button is-primary" @click="closeCustomizePanel">Close</a>
+                <a class="button is-success" @click="applyNewFilterInfo">Apply</a>
               </div>
             </div>
           </div>
@@ -112,6 +100,8 @@
     data: function(){
       return{
         permits: [],
+        sortInfo: [],
+        userSortInfo: [],
         pageSize: 9,
         page:  0,
         visible: false,
@@ -175,9 +165,32 @@
       },
       showCustomizePanel : function(){
          this.showCustomize = true
+         var address = new Object()
+         address.label = "Address"
+         address.name = "address"
+         address.direction = false
+         this.sortInfo.push(address)
       },
       closeCustomizePanel : function(){
          this.showCustomize = false
+         this.sortInfo = []
+      },
+      changeSortDirection : function (target){
+        var key = target.target.getAttribute('name')
+        var si = this.userSortInfo.find(function(element){
+          return element.field === key
+        })
+        if (si === undefined){
+          si = new Object()
+          si.field = key;
+          this.userSortInfo.push(si)
+        }
+        else{
+          si.ascending = target.target.getAttribute('ascending')
+        }
+      },
+      applyNewFilterInfo: function (){
+        debugger
       }
     }
   }
@@ -185,6 +198,11 @@
 <style lang="scss">
   #permits .column {
       flex-basis: 33%;
+  }
+
+  #permits .panel .panel-block>.control{
+    width: auto;
+    text-align: right;
   }
 
   .fade-enter-active, .fade-leave-active {

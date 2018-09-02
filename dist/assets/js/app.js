@@ -20454,7 +20454,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
+exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n}\n#permits .panel .panel-block > .control {\n  width: auto;\n  text-align: right;\n}\n.fade-enter-active, .fade-leave-active {\n  transition: opacity .5s;\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0;\n}\n@media (max-device-width: 1366px) {\nbody {\n    font-size: 0.70rem;\n}\n}\n@media (max-device-width: 1024px) {\nbody {\n    font-size: 0.55rem;\n}\n}\n@media (max-device-width: 824px) {\nbody {\n    font-size: 0.35rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -20466,18 +20466,6 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n}\n.fade-ente
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_EventBus__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PermitDetail_vue__ = __webpack_require__(46);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -20580,6 +20568,8 @@ var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&repo
   data: function(){
     return{
       permits: [],
+      sortInfo: [],
+      userSortInfo: [],
       pageSize: 9,
       page:  0,
       visible: false,
@@ -20643,9 +20633,33 @@ var getPermitsPath = 'http://52.14.168.26:8081/api/client/city?area=boulder&repo
     },
     showCustomizePanel : function(){
        this.showCustomize = true
+       var address = new Object()
+       address.label = "Address"
+       address.name = "address"
+       address.direction = false
+       this.sortInfo.push(address)
     },
     closeCustomizePanel : function(){
        this.showCustomize = false
+       this.sortInfo = []
+    },
+    changeSortDirection : function (target){
+      var key = target.target.getAttribute('name')
+      var si = this.userSortInfo.find(function(element){
+        return element.field === key
+      })
+      if (si === undefined){
+        si = new Object()
+        si.field = key;
+        this.userSortInfo.push(si)
+      }
+      else{
+        si.ascending = target.target.getAttribute('ascending')
+      }
+    },
+    applyNewFilterInfo: function (){
+      debugger
+      console.log(this.userSortInfo[0])
     }
   }
 });
@@ -21108,52 +21122,61 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "panel-heading"
   }, [_vm._v("\n              Fields\n            ")]), _vm._v(" "), _c('p', {
     staticClass: "panel-tabs"
-  }, [_c('a', [_vm._v("Sort")])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-block"
-  }, [_c('div', {
-    staticClass: "level"
-  }, [_c('div', {
-    staticClass: "level-left"
-  }, [_vm._v("\n                  Address\n                ")]), _vm._v(" "), _c('div', {
-    staticClass: "level-right"
-  }, [_c('div', {
-    staticClass: "level-item"
-  }, [_c('a', [_c('span', {
-    staticClass: "icon is-small"
-  }, [_c('icon', {
-    attrs: {
-      "name": "sort-alpha-asc"
-    }
-  })], 1)])]), _vm._v(" "), _c('div', {
-    staticClass: "level-item"
-  }, [_c('a', [_c('span', {
-    staticClass: "icon is-small"
-  }, [_c('icon', {
-    attrs: {
-      "name": "sort-alpha-desc"
-    }
-  })], 1)])])])])]), _vm._v(" "), _c('div', {
-    staticClass: "panel-block"
-  }, [_vm._v("\n              Total Amount\n                "), _c('a', [_c('span', {
-    staticClass: "icon is-small"
-  }, [_c('icon', {
-    attrs: {
-      "name": "sort-amount-asc"
-    }
-  })], 1)]), _vm._v(" "), _c('a', [_c('span', {
-    staticClass: "icon is-small"
-  }, [_c('icon', {
-    attrs: {
-      "name": "sort-amount-desc"
-    }
-  })], 1)])]), _vm._v(" "), _c('div', {
+  }, [_c('a', [_vm._v("Sort")])]), _vm._v(" "), _vm._l((_vm.sortInfo), function(si) {
+    return _c('div', {
+      staticClass: "panel-block"
+    }, [_vm._v("\n              " + _vm._s(si.label) + "\n              "), _c('div', {
+      staticClass: "control"
+    }, [_c('label', {
+      staticClass: "radio"
+    }, [_c('div', {
+      staticClass: "control"
+    }, [_c('div', {
+      staticClass: "radio"
+    }, [_vm._v("\n                      asc.\n                      "), _c('input', {
+      attrs: {
+        "type": "radio",
+        "name": si.name,
+        "ascending": "true"
+      },
+      on: {
+        "click": _vm.changeSortDirection
+      }
+    }), _vm._v(" "), _c('span', {
+      staticClass: "icon is-small"
+    }, [_c('icon', {
+      attrs: {
+        "name": "sort-alpha-asc"
+      }
+    })], 1), _vm._v(" "), _vm._v("\n                      desc.\n                      "), _c('input', {
+      attrs: {
+        "type": "radio",
+        "name": si.name,
+        "ascending": "false"
+      },
+      on: {
+        "click": _vm.changeSortDirection
+      }
+    }), _vm._v(" "), _c('span', {
+      staticClass: "icon is-small"
+    }, [_c('icon', {
+      attrs: {
+        "name": "sort-alpha-desc"
+      }
+    })], 1)])])])])])
+  }), _vm._v(" "), _c('div', {
     staticClass: "panel-block"
   }, [_c('a', {
     staticClass: "button is-primary",
     on: {
       "click": _vm.closeCustomizePanel
     }
-  }, [_vm._v("Close")])])])]) : _vm._e()]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Close")]), _vm._v(" "), _c('a', {
+    staticClass: "button is-success",
+    on: {
+      "click": _vm.applyNewFilterInfo
+    }
+  }, [_vm._v("Apply")])])], 2)]) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "column"
   }, [_c('div', {
     staticClass: "columns"
