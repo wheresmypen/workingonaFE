@@ -48,9 +48,11 @@
       getLogs: function () {
         var that = this;
         apiCall.APIget(getLogsPath, that.token).done(function(response){
-
+          debugger;
           that.logs = response;
           that.visible = true;
+        }).fail(function(response){
+          debugger;
         })
       }
     }

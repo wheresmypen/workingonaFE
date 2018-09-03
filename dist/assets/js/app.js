@@ -19669,9 +19669,11 @@ var getLogsPath = 'http://localhost:8081/api/admin/city/logs'
     getLogs: function () {
       var that = this;
       apiCall.APIget(getLogsPath, that.token).done(function(response){
-
+        debugger;
         that.logs = response;
         that.visible = true;
+      }).fail(function(response){
+        debugger;
       })
     }
   }
@@ -20560,7 +20562,7 @@ exports.push([module.i, "\n#permits .column {\n  flex-basis: 33%;\n}\n#permits .
 var apiCall = __webpack_require__(6)
 var $ = __webpack_require__(5)
 var getPermitsPath = 'http://localhost:8081/api/client/city?area=boulder&report=master&pageSize='
-var postUserSortInfo = 'http://localhost:8081/api/client/filters?userName=user&area=boulder'
+var postUserSortInfo = 'http://localhost:8081/api/client/filters?area=boulder'
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'Permits',
@@ -20663,6 +20665,7 @@ var postUserSortInfo = 'http://localhost:8081/api/client/filters?userName=user&a
       var that = this
       apiCall.APIput(postUserSortInfo, this.token, this.userSortInfo).done(function(response){
         that.showCustomize = false
+        this.sortInfo = []
       }).fail(function(response){
         //todo pop error
       })

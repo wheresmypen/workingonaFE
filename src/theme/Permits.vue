@@ -194,6 +194,7 @@
         var that = this
         apiCall.APIput(postUserSortInfo, this.token, this.userSortInfo).done(function(response){
           that.showCustomize = false
+          this.sortInfo = []
         }).fail(function(response){
           //todo pop error
         })
